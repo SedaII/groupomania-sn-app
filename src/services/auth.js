@@ -8,6 +8,6 @@ export const login = (data) => {
   return api.post("/auth/login", data);
 };
 
-export const setAuth = (token) => {
-  api.defaults.headers.common["Authorization"] = "Bearer " + token;
+export const setProfil = (data) => {
+  return api.put("auth/profil", data);
 };
