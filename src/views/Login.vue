@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { login, setAuth } from "../services/auth";
+import { login } from "../services/auth";
 
 export default {
   data() {
@@ -37,8 +37,15 @@ export default {
     login() {
       login({ ...this.form })
         .then(({ data }) => {
-          setAuth(data.token);
-          this.$router.replace({ name: "home" });
+          if (
+            data.firstname === null &&
+            data.lastname === null &&
+            data.job === null
+          ) {
+            this.$router.replace({ name: "profil" });
+          } else {
+            this.$router.replace({ name: "home" });
+          }
         })
         .catch((error) => console.log(error));
     },

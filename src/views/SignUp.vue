@@ -33,7 +33,7 @@
 <script>
 import isEmailValid from "../utils/isEmailValid";
 import isPasswordValid from "../utils/isPasswordValid";
-import { signUp, login, setAuth } from "../services/auth";
+import { signUp, login } from "../services/auth";
 
 export default {
   data() {
@@ -69,8 +69,15 @@ export default {
           .then(() => {
             login({ ...this.form })
               .then(({ data }) => {
-                setAuth(data.token);
-                this.$router.replace({ name: "home" });
+                if (
+                  data.firstname === null &&
+                  data.lastname === null &&
+                  data.job === null
+                ) {
+                  this.$router.replace({ name: "profil" });
+                } else {
+                  this.$router.replace({ name: "home" });
+                }
               })
               .catch((error) => console.log(error));
           })
