@@ -1,8 +1,12 @@
 <template>
-  <div class="Post">
+  <div
+    class="Post"
+    style="background-color: grey; width: 500px; margin: 1em; cursor: pointer"
+    @click="$router.push({ name: 'post', params: { id: post.id } })"
+  >
     <div class="Post__header">
       <span>{{ post.author.fullname }} </span>
-      <span>{{ post.createdAt }}</span>
+      <span>{{ dateHumanizer(post.createdAt) }}</span>
     </div>
     <br />
     <div class="Post__title">
@@ -29,7 +33,7 @@
       >
         <div class="Post__comment-header">
           <span>{{ comment.author.fullname }} </span>
-          <span>{{ comment.createdAt }}</span>
+          <span>{{ dateHumanizer(comment.createdAt) }}</span>
         </div>
         <div class="Post__comment-content">
           {{ comment.content }}
@@ -41,12 +45,17 @@
 </template>
 
 <script>
+import dateHumanizer from "../utils/dateHumanizer";
+
 export default {
   props: {
     post: {
       type: Object,
       default: () => ({}),
     },
+  },
+  methods: {
+    dateHumanizer,
   },
 };
 </script>
