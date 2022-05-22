@@ -15,6 +15,7 @@
         <label for="job">Métier</label>
         <input id="job" type="text" v-model="job" />
       </div>
+      <div v-if="!isJobValid">Veuillez indiquer votre métier.</div>
       <button type="button" @click="formValidator">Continuer</button>
     </form>
   </div>
@@ -30,6 +31,7 @@ export default {
       lastname: "",
       job: "",
       isLastnameValid: true,
+      isJobValid: true,
     };
   },
   computed: {
@@ -50,12 +52,14 @@ export default {
         .catch((error) => console.log(error));
     },
     formValidator() {
-      if (this.lastname.length > 0) {
-        this.isLastnameValid = true;
+      if (this.lastname.length > 0 && this.job.length > 0) {
         this.createProfil();
-      } else {
-        this.isLastnameValid = false;
+        this.isLastnameValid = this.isJobValid = true;
       }
+
+      this.isLastnameValid = this.lastname.length > 0;
+
+      this.isJobValid = this.job.length > 0;
     },
   },
 };
