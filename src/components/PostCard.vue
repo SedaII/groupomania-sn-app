@@ -2,7 +2,7 @@
   <div
     class="Post"
     style="background-color: grey; width: 500px; margin: 1em; cursor: pointer"
-    @click="$router.push({ name: 'post', params: { id: post.id } })"
+    @click="openPost()"
   >
     <div class="Post__header">
       <span>{{ post.author.fullname }} </span>
@@ -19,6 +19,15 @@
         style="width: 100px; height: 100px"
       />
       <span v-if="post.description">{{ post.description }}</span>
+    </div>
+    <div>
+      <button
+        v-if="userId === post.author.id || isAdmin"
+        type="button"
+        @click.stop="$emit('deletePost', post.id)"
+      >
+        Supprimer
+      </button>
     </div>
     <br />
     <div class="Post__footer">
@@ -38,6 +47,15 @@
         <div class="Post__comment-content">
           {{ comment.content }}
         </div>
+        <button
+          v-if="userId === comment.author.id || isAdmin"
+          type="button"
+          @click.stop="
+            $emit('deleteComment', { postId: post.id, commentId: comment.id })
+          "
+        >
+          Supprimer
+        </button>
       </div>
     </div>
     ===============================================
@@ -54,8 +72,22 @@ export default {
       default: () => ({}),
     },
   },
+  computed: {
+    userId() {
+      return localStorage.getItem("userId");
+    },
+    isAdmin() {
+      return JSON.parse(localStorage.getItem("isAdmin"));
+    },
+  },
   methods: {
     dateHumanizer,
+    openPost() {
+      console.log(this.$route.name);
+      if (this.$route.name === "home") {
+        this.$router.push({ name: "post", params: { id: this.post.id } });
+      }
+    },
   },
 };
 </script>

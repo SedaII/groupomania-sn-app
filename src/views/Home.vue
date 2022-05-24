@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Home</h1>
-    <div class="container" v-if="posts.length > 0">
+    <div class="container">
       <form class="PostForm">
         <div class="Form__group">
           <label for="title">title</label>
@@ -39,13 +39,22 @@
       <br />
       <br />
       <br />
-      <PostCard v-for="post in posts" :key="post.id" :post="post" />
+      <div v-if="posts.length > 0">
+        <PostCard
+          v-for="post in posts"
+          :key="post.id"
+          :post="post"
+          @deleteComment="deleteComment"
+          @deletePost="deletePost"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getAllPosts, createPost } from "../services/post";
+import { getAllPosts, createPost, deletePost } from "../services/post";
+import { deleteComment } from "../services/comment";
 import PostCard from "../components/PostCard.vue";
 
 export default {
@@ -63,11 +72,11 @@ export default {
     isPostValid() {
       switch (this.postType) {
         case "description":
-          return true;
+          return this.title;
         case "image":
-          return this.isImageSelected;
+          return this.title && this.isImageSelected;
         case "url":
-          return this.imageUrl;
+          return this.title && this.imageUrl;
         default:
           return false;
       }
@@ -100,6 +109,34 @@ export default {
           this.posts.unshift(data.post);
         })
         .catch((error) => console.log(error));
+    },
+    deletePost(id) {
+      if (window.confirm("Êtes-vous sûr de vouloir supprimer ce post ?")) {
+        deletePost(id)
+          .then(
+            () => (this.posts = this.posts.filter((post) => post.id !== id))
+          )
+          .catch((error) => console.log(error));
+      }
+    },
+    deleteComment({ postId, commentId }) {
+      if (
+        window.confirm("Êtes-vous sûr de vouloir supprimer ce commentaire ?")
+      ) {
+        deleteComment(commentId)
+          .then(() => {
+            this.posts.map((post) => {
+              if (post.id === postId) {
+                post.comments = post.comments.filter(
+                  (comment) => comment.id !== commentId
+                );
+              }
+
+              return post;
+            });
+          })
+          .catch((error) => console.log(error));
+      }
     },
   },
   created() {

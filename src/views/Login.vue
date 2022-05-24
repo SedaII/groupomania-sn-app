@@ -37,10 +37,12 @@ export default {
     login() {
       login({ ...this.form })
         .then(({ data }) => {
+          localStorage.setItem("userId", data.user.id);
+          localStorage.setItem("isAdmin", data.user.isAdmin);
           if (
-            data.firstname === null &&
-            data.lastname === null &&
-            data.job === null
+            data.user.firstname === null &&
+            data.user.lastname === null &&
+            data.user.job === null
           ) {
             this.$router.replace({ name: "profil" });
           } else {
