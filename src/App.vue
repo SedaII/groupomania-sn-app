@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <nav v-if="$route.name !== 'login' && $route.name !== 'signup'">
+    <nav
+      v-if="
+        $route.name !== 'login' &&
+        $route.name !== 'signup' &&
+        $route.name !== 'profil'
+      "
+    >
       <div v-if="$route.name !== 'home'">
         <router-link to="/home">Home</router-link> |
       </div>
