@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import { isConnected } from "../services/auth";
 
 Vue.use(VueRouter);
 
@@ -29,12 +30,32 @@ const routes = [
     name: "post",
     component: () => import("@/views/Post.vue"),
   },
+  {
+    path: "/setting",
+    name: "setting",
+    component: () => import("@/views/Setting.vue"),
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach(async (to, from, next) => {
+  isConnected()
+    .then(() => {
+      console.log("oui");
+      next();
+    })
+    .catch(() => {
+      if (to.name !== "login" && to.name !== "signup") {
+        next({ name: "login" });
+      } else {
+        next();
+      }
+    });
 });
 
 export default router;

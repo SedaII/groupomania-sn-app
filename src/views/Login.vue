@@ -12,6 +12,7 @@
       </div>
       <button type="button" @click="login">Se connecter</button>
     </form>
+    <router-link to="/signup">S'inscrire</router-link>
   </div>
 </template>
 

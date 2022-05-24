@@ -27,6 +27,7 @@
       </div>
       <button type="button" @click="formValidator">S'inscrire</button>
     </form>
+    <router-link to="/login">Se connecter</router-link>
   </div>
 </template>
 

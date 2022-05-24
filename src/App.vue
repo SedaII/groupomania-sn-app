@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/signup">Signup</router-link> |
-      <router-link to="/home">Home</router-link>
+    <nav v-if="$route.name !== 'login' && $route.name !== 'signup'">
+      <div v-if="$route.name !== 'home'">
+        <router-link to="/home">Home</router-link> |
+      </div>
+      <router-link to="/setting">Setting</router-link>
     </nav>
     <router-view />
   </div>
