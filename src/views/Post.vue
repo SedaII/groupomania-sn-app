@@ -46,6 +46,7 @@ export default {
         .then(({ data }) => {
           this.post.comments.unshift(data.comment);
           this.comment = "";
+          this.post.commentCount++;
         })
         .catch((error) => console.log(error));
     },
@@ -58,6 +59,7 @@ export default {
             this.post.comments = this.post.comments.filter(
               (comment) => comment.id !== commentId
             );
+            this.post.commentCount--;
           })
           .catch((error) => console.log(error));
       }

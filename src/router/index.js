@@ -21,6 +21,11 @@ const routes = [
     component: () => import("@/views/Home.vue"),
   },
   {
+    path: "/",
+    name: "index",
+    component: () => import("@/views/Login.vue"),
+  },
+  {
     path: "/profil",
     name: "profil",
     component: () => import("@/views/Profil.vue"),
@@ -46,7 +51,6 @@ const router = new VueRouter({
 router.beforeEach(async (to, from, next) => {
   isConnected()
     .then(() => {
-      console.log("oui");
       next();
     })
     .catch(() => {

@@ -142,7 +142,10 @@ export default {
   created() {
     getAllPosts()
       .then(({ data }) => {
-        this.posts = data.posts;
+        this.posts = data.posts.map((post) => {
+          post.comments = post.comments.slice(0, 2);
+          return post;
+        });
       })
       .catch((error) => console.log(error));
   },

@@ -31,7 +31,7 @@
     </div>
     <br />
     <div class="Post__footer">
-      <span>{{ post.comments ? post.comments.length : 0 }} Commentaires</span>
+      <span>{{ post.commentCount }} Commentaires</span>
     </div>
     <br />
     <div v-if="post.comments.length > 0" class="Post__comment-container">
@@ -83,7 +83,6 @@ export default {
   methods: {
     dateHumanizer,
     openPost() {
-      console.log(this.$route.name);
       if (this.$route.name === "home") {
         this.$router.push({ name: "post", params: { id: this.post.id } });
       }
