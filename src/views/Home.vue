@@ -149,6 +149,7 @@ export default {
           .then(() => {
             this.posts.map((post) => {
               if (post.id === postId) {
+                post.commentCount--;
                 post.comments = post.comments.filter(
                   (comment) => comment.id !== commentId
                 );

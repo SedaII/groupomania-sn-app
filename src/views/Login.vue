@@ -16,6 +16,7 @@
           Se connecter
         </button>
       </div>
+      <div v-if="badUser">Nous ne reconnaissons pas vos identifiants</div>
     </form>
   </div>
 </template>
@@ -28,6 +29,7 @@ export default {
     return {
       email: "",
       password: "",
+      badUser: false,
     };
   },
   computed: {
@@ -42,6 +44,7 @@ export default {
     login() {
       login({ ...this.form })
         .then(({ data }) => {
+          this.badUser = false;
           localStorage.setItem("userId", data.user.id);
           localStorage.setItem("isAdmin", data.user.isAdmin);
           if (
@@ -54,7 +57,10 @@ export default {
             this.$router.replace({ name: "home" });
           }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          this.badUser = true;
+          console.log(error);
+        });
     },
   },
 };
@@ -66,5 +72,10 @@ export default {
 .link {
   color: $color-primary;
   margin-right: 1em;
+}
+
+.Form {
+  width: 300px;
+  max-width: 300px;
 }
 </style>

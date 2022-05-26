@@ -7,12 +7,12 @@
         <input id="firstname" type="text" v-model="firstname" />
       </div>
       <div class="Form__group">
-        <label for="lastname">Nom</label>
+        <label for="lastname">Nom*</label>
         <input id="lastname" type="text" v-model="lastname" />
       </div>
       <div v-if="!isLastnameValid">Veuillez indiquer votre nom.</div>
       <div class="Form__group">
-        <label for="job">Métier</label>
+        <label for="job">Métier*</label>
         <input id="job" type="text" v-model="job" />
       </div>
       <div v-if="!isJobValid">Veuillez indiquer votre métier.</div>

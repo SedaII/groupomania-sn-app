@@ -111,4 +111,9 @@ export default {
   color: $color-primary;
   margin-right: 1em;
 }
+
+.Form {
+  width: 300px;
+  max-width: 300px;
+}
 </style>

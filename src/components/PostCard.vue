@@ -33,7 +33,7 @@
     <div class="Post__footer">
       <span
         >{{ post.commentCount }}
-        {{ post.commentCount > 0 ? "Commentaires" : "Commentaire" }}</span
+        {{ post.commentCount > 1 ? "Commentaires" : "Commentaire" }}</span
       >
       <slot></slot>
       <div v-if="post.comments.length > 0" class="Post__comment-container">
