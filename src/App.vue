@@ -8,25 +8,19 @@
       "
     >
       <div v-if="$route.name !== 'home'">
-        <router-link to="/home">Home</router-link> |
+        <router-link to="/home">Accueil</router-link> |
       </div>
-      <router-link to="/setting">Setting</router-link>
+      <router-link to="/setting">Paramètres</router-link>
     </nav>
     <router-view />
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
 nav {
+  display: flex;
   padding: 30px;
+  justify-content: flex-end;
 
   a {
     font-weight: bold;

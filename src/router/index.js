@@ -49,17 +49,23 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  isConnected()
-    .then(() => {
-      next();
-    })
-    .catch(() => {
-      if (to.name !== "login" && to.name !== "signup") {
-        next({ name: "login" });
-      } else {
+  if (from.name === "login" && to.name === "signup") {
+    next();
+  } else if (from.name === "signup" && to.name === "login") {
+    next();
+  } else {
+    isConnected()
+      .then(() => {
         next();
-      }
-    });
+      })
+      .catch(() => {
+        if (to.name !== "login" && to.name !== "signup") {
+          next({ name: "login" });
+        } else {
+          next();
+        }
+      });
+  }
 });
 
 export default router;

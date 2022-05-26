@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Login</h1>
+    <h1>Connexion</h1>
     <form class="Form">
       <div class="Form__group">
         <label for="email">email</label>
@@ -10,9 +10,13 @@
         <label for="password">Mot de passe</label>
         <input id="password" type="password" v-model="password" />
       </div>
-      <button type="button" @click="login">Se connecter</button>
+      <div class="row">
+        <router-link to="/signup" class="link">S'inscrire</router-link>
+        <button type="button" class="Button Button--primary" @click="login">
+          Se connecter
+        </button>
+      </div>
     </form>
-    <router-link to="/signup">S'inscrire</router-link>
   </div>
 </template>
 
@@ -55,3 +59,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../assets/variables";
+
+.link {
+  color: $color-primary;
+  margin-right: 1em;
+}
+</style>

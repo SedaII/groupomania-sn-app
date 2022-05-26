@@ -16,13 +16,30 @@
         <input id="job" type="text" v-model="job" />
       </div>
       <div v-if="!isJobValid">Veuillez indiquer votre métier.</div>
-      <button type="button" @click="formValidator">
+      <button
+        class="Button Button--primary"
+        type="button"
+        @click="formValidator"
+      >
         Sauvegarder votre profil
       </button>
     </form>
 
-    <button type="button" @click="logout">Déconnexion</button>
-    <button type="button" @click="deleteAccount">Supprimer mon compte</button>
+    <div class="setting-item">
+      <button class="Button Button--primary" type="button" @click="logout">
+        Déconnexion
+      </button>
+    </div>
+
+    <div class="setting-item">
+      <button
+        class="Button Button--secondary"
+        type="button"
+        @click="deleteAccount"
+      >
+        Supprimer mon compte
+      </button>
+    </div>
   </div>
 </template>
 
@@ -94,3 +111,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.setting-item {
+  margin-top: 1em;
+}
+</style>

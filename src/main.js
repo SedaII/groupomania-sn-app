@@ -1,5 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
+import "./assets/style.scss";
 import router from "./router";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";

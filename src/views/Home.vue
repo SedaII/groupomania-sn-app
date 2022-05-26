@@ -1,18 +1,34 @@
 <template>
   <div>
-    <h1>Home</h1>
+    <h1>Accueil</h1>
     <div class="container">
       <form class="PostForm">
         <div class="Form__group">
-          <label for="title">title</label>
+          <label class="PostForm__title" for="title">Titre</label>
           <input id="title" type="text" v-model="title" />
         </div>
-        <div class="Form__group">
-          <button type="button" @click="postType = 'description'">
+        <div class="Form__group row">
+          <button
+            class="PostForm__btn Button Button--primary"
+            type="button"
+            @click="postType = 'description'"
+          >
             Description
           </button>
-          <button type="button" @click="postType = 'image'">Image & GIF</button>
-          <button type="button" @click="postType = 'url'">Url</button>
+          <button
+            class="PostForm__btn Button Button--primary"
+            type="button"
+            @click="postType = 'image'"
+          >
+            Image & GIF
+          </button>
+          <button
+            class="PostForm__btn Button Button--primary"
+            type="button"
+            @click="postType = 'url'"
+          >
+            Url
+          </button>
         </div>
         <div v-if="postType === 'description'" class="Form__group">
           <label for="description">Description</label>
@@ -32,7 +48,13 @@
             @change="isImageSelected = true"
           />
         </div>
-        <button type="button" @click="createPost" :disabled="!isPostValid">
+        <button
+          type="button"
+          class="Button"
+          :class="isPostValid ? 'Button--primary' : 'Button--primary-disabled'"
+          @click="createPost"
+          :disabled="!isPostValid"
+        >
           Poster
         </button>
       </form>
@@ -161,5 +183,27 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.PostForm {
+  width: 500px;
+  background-color: white;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 20px;
+
+  &__title {
+    font-size: 1.25em;
+    font-weight: bold;
+  }
+
+  &__btn {
+    margin-right: 1em;
+  }
+}
+
+.row {
+  flex-direction: row;
+  align-items: stretch;
 }
 </style>

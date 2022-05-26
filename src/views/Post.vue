@@ -6,21 +6,33 @@
         :post="post"
         @deleteComment="deleteComment"
         @deletePost="deletePost"
-      />
-      <form class="CommentForm">
-        <div class="Form__group">
-          <label for="comment">Votre commentaire</label>
-          <input id="comment" type="text" v-model="comment" />
-        </div>
+      >
+        <form class="CommentForm">
+          <div class="Form__group">
+            <label for="comment">Votre commentaire</label>
+            <textarea
+              class="CommentForm__content"
+              id="comment"
+              type="text"
+              v-model="comment"
+              placeholder="Réagissez à ce post !"
+            />
+          </div>
 
-        <button
-          type="button"
-          @click="createComment"
-          :disabled="!comment.length > 0"
-        >
-          Commenter
-        </button>
-      </form>
+          <button
+            type="button"
+            class="CommentButton Button"
+            :class="
+              comment.length > 0
+                ? 'Button--primary'
+                : 'Button--primary-disabled'
+            "
+            @click="createComment"
+          >
+            Commenter
+          </button>
+        </form>
+      </PostCard>
     </div>
   </div>
 </template>
@@ -82,3 +94,15 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.CommentForm {
+  &__content {
+    resize: none;
+  }
+}
+
+.Form__group {
+  margin-top: 1em;
+}
+</style>

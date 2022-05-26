@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Signup</h1>
+    <h1>Inscription</h1>
     <form class="Form">
       <div class="Form__group">
         <label for="email">email</label>
@@ -25,9 +25,18 @@
           Les mots de passe ne correspondent pas
         </div>
       </div>
-      <button type="button" @click="formValidator">S'inscrire</button>
+      <div class="row">
+        <router-link to="/login" class="link">Se connecter</router-link>
+
+        <button
+          type="button"
+          class="Button Button--primary"
+          @click="formValidator"
+        >
+          S'inscrire
+        </button>
+      </div>
     </form>
-    <router-link to="/login">Se connecter</router-link>
   </div>
 </template>
 
@@ -94,3 +103,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../assets/variables";
+
+.link {
+  color: $color-primary;
+  margin-right: 1em;
+}
+</style>
